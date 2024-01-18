@@ -8,9 +8,53 @@ namespace PAK_Manipulator
         public Form1()
         {
             InitializeComponent();
+            //InitializeDragDropTextBox();
             foreach (RadioButton rb in groupBox1.Controls.OfType<RadioButton>())
             {
                 rb.CheckedChanged += ChangeConsole;
+            }
+        }
+        /*private void InitializeDragDropTextBox()
+        {
+
+            pakFilesFolder.AllowDrop = true;
+
+            // Handle DragEnter event
+            pakFilesFolder.DragEnter += new DragEventHandler(textBox_DragEnter);
+
+            // Handle DragDrop event
+            pakFilesFolder.DragDrop += new DragEventHandler(textBox_DragDrop);
+        }*/
+
+        private void textBox_DragEnter(object sender, DragEventArgs e)
+        {
+            // Check if the Data format of the file(s) can be accepted
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                // Modify the DragDropEffects to provide a visual feedback to the user
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                // Reject the drop
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void textBox_DragDrop(object sender, DragEventArgs e)
+        {
+            // Extract the data from the DataObject-Container into a string list
+            string[] fileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+
+            // Optionally, you can handle multiple files or directories here
+            // For this example, let's handle only the first path
+            if (fileList != null && fileList.Length > 0)
+            {
+                TextBox textBox = sender as TextBox; // Cast the sender back to a TextBox
+                if (textBox != null)
+                {
+                    textBox.Text = fileList[0];
+                }
             }
         }
 
@@ -72,7 +116,7 @@ namespace PAK_Manipulator
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (pakFilesFolder.Text == "")
+            if (pakFilesFolder.Text == "" || !Directory.Exists(pakFilesFolder.Text))
             {
                 MessageBox.Show("Please select a folder containing PAK files to unpack.");
                 return;
@@ -97,7 +141,7 @@ namespace PAK_Manipulator
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (pakFolderToCompile.Text == "")
+            if (pakFolderToCompile.Text == "" || !Directory.Exists(pakFolderToCompile.Text))
             {
                 MessageBox.Show("Please select a folder containing files to compile.");
                 return;

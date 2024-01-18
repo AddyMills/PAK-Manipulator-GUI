@@ -124,11 +124,14 @@
             // 
             // pakFilesFolder
             // 
+            pakFilesFolder.AllowDrop = true;
             pakFilesFolder.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pakFilesFolder.Location = new Point(3, 21);
             pakFilesFolder.Name = "pakFilesFolder";
             pakFilesFolder.Size = new Size(391, 23);
             pakFilesFolder.TabIndex = 10;
+            pakFilesFolder.DragDrop += textBox_DragDrop;
+            pakFilesFolder.DragEnter += textBox_DragEnter;
             // 
             // label1
             // 
@@ -183,7 +186,7 @@
             // 
             gameSelect.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             gameSelect.FormattingEnabled = true;
-            gameSelect.Items.AddRange(new object[] { "GH3", "GHWT", "GHWoR" });
+            gameSelect.Items.AddRange(new object[] { "GH3", "GHWT" });
             gameSelect.Location = new Point(263, 153);
             gameSelect.Name = "gameSelect";
             gameSelect.Size = new Size(131, 23);
@@ -289,11 +292,14 @@
             // 
             // pakFolderToCompile
             // 
+            pakFolderToCompile.AllowDrop = true;
             pakFolderToCompile.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pakFolderToCompile.Location = new Point(3, 21);
             pakFolderToCompile.Name = "pakFolderToCompile";
             pakFolderToCompile.Size = new Size(391, 23);
             pakFolderToCompile.TabIndex = 16;
+            pakFolderToCompile.DragDrop += textBox_DragDrop;
+            pakFolderToCompile.DragEnter += textBox_DragEnter;
             // 
             // label4
             // 
