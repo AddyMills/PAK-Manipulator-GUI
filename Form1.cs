@@ -79,7 +79,6 @@ namespace PAK_Manipulator
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 pakFolderToCompile.Text = folderBrowserDialog1.SelectedPath;
-                SetPakOutput();
             }
         }
         private void ChangeConsole(object sender, EventArgs e)
@@ -206,6 +205,11 @@ namespace PAK_Manipulator
                 // Clear the contents of the textbox if the checkbox is unchecked
                 assetContextText.Clear();
             }
+        }
+
+        private void pakFolderToCompile_TextChanged(object sender, EventArgs e)
+        {
+            SetPakOutput();
         }
     }
 }
